@@ -205,7 +205,7 @@ void USART1_Init()
 */
 void USART1_IRQHandler()
 {
-	char cChar;
+
   if( USART_GetITStatus( USART1, USART_IT_TXE ) == SET ) {
     /* The interrupt was caused by the THR becoming empty.  Are there any
     more characters to transmit? */
@@ -219,12 +219,11 @@ void USART1_IRQHandler()
   }
   
   if( USART_GetITStatus( USART1, USART_IT_RXNE ) == SET ) {
-    cChar = USART_ReceiveData( USART1 );
-    if(U1_Receive) U1_Receive( cChar );
+    if(U1_Receive) U1_Receive( USART_ReceiveData( USART1 ));
     USART_ClearITPendingBit(USART1, USART_IT_RXNE);
   }
   if( USART_GetITStatus( USART1, USART_IT_ORE ) == SET ) {
-    cChar = USART_ReceiveData( USART1);
+		USART_ReceiveData( USART1);
   }	
 }
 
@@ -339,6 +338,44 @@ void USART5_IRQHandler()
 void USART6_Init()
 {
 	//TODO
+	GPIO_InitTypeDef GPIO_InitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
+	USART_InitTypeDef USART_InitStructure;
+	
+	 
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC,ENABLE); //
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6,ENABLE);//
+
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource6,GPIO_AF_USART6); //GPIOC6
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource7,GPIO_AF_USART6); //GPIOC7
+	 
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7; //GPIOC6、GPIOC7
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;   //50MHz
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉
+	GPIO_Init(GPIOC,&GPIO_InitStructure); // PC6 PC7
+
+	 //USART6 
+	USART_InitStructure.USART_BaudRate = COM6_BAUDARTE;//波特率
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//8位数据位
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//1位停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无校验
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件流控
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //收发模式
+	USART_Init(USART6, &USART_InitStructure); //初始化串口6
+
+	USART_Cmd(USART6, ENABLE);  //使能串口6
+	 
+	USART_ClearFlag(USART6, USART_FLAG_TC);
+	USART_ITConfig(USART6, USART_IT_RXNE, ENABLE);//
+	//Usart6 NVIC 配置
+	NVIC_InitStructure.NVIC_IRQChannel = USART6_IRQn;//
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority =3;//
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority =2;       //
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;         //
+	NVIC_Init(&NVIC_InitStructure); //
+	//
 	Coms[COM6] = USART6;
 	BF_Init(&Com6TxBuffer);
 	ComBuffers[COM6] = &Com6TxBuffer;
@@ -349,27 +386,22 @@ void USART6_Init()
 */
 void USART6_IRQHandler()
 {
-	char cChar;
   if( USART_GetITStatus( USART6, USART_IT_TXE ) == SET ) {
-    /* The interrupt was caused by the THR becoming empty.  Are there any
-    more characters to transmit? */
 
     if(BF_Empty(&Com6TxBuffer)) {
 			USART_ITConfig( USART6, USART_IT_TXE, DISABLE );
 		} else {
-			cChar = BF_ReadByte(&Com6TxBuffer);
-			USART_SendData(USART6, cChar);
+			USART_SendData(USART6, BF_ReadByte(&Com6TxBuffer));
 		}
     USART_ClearITPendingBit(USART6, USART_IT_TXE);
   }
   
   if( USART_GetITStatus( USART6, USART_IT_RXNE ) == SET ) {
-    cChar = USART_ReceiveData( USART6 );
-    if(U6_Receive) U6_Receive( cChar );
+    if(U6_Receive) U6_Receive( USART_ReceiveData( USART6 ) );
     USART_ClearITPendingBit(USART6, USART_IT_RXNE);
   }
   if( USART_GetITStatus( USART6, USART_IT_ORE ) == SET ) {
-    cChar = USART_ReceiveData( USART6 );
+		USART_ReceiveData( USART6 );
   } 
 }
 

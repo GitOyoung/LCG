@@ -6,7 +6,6 @@
 
 #include <stdio.h>
 
-#include "gpio.h"
 
 int main(void)
 {
@@ -15,7 +14,7 @@ int main(void)
 	char message[] = "Hello, World! Made by Oyoung\r\n";
 	while(1) {
 		SerialPutString(COM1, message);
-		delay_ms(100);
+		delay_ms(1000);
 	}
 	
 }

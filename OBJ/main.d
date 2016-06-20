@@ -62,4 +62,3 @@
 ..\obj\main.o: ..\UCOSIII\uCOS_CONFIG\app_cfg.h
 ..\obj\main.o: ..\UCOSIII\UCOS_BSP\bsp.h
 ..\obj\main.o: ..\UCOSIII\uCOS_CONFIG\os_app_hooks.h
-..\obj\main.o: gpio.h
