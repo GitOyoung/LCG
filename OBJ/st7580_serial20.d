@@ -1,0 +1,41 @@
+..\obj\st7580_serial20.o: ST7580_Serial20.c
+..\obj\st7580_serial20.o: D:\Program Files (x86)\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+..\obj\st7580_serial20.o: ST7580_Serial20.h
+..\obj\st7580_serial20.o: st7580_stm32_bsp.h
+..\obj\st7580_serial20.o: stm32f4xx.h
+..\obj\st7580_serial20.o: ..\CORE\core_cm4.h
+..\obj\st7580_serial20.o: D:\Program Files (x86)\Keil\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\st7580_serial20.o: ..\CORE\core_cmInstr.h
+..\obj\st7580_serial20.o: ..\CORE\core_cmFunc.h
+..\obj\st7580_serial20.o: ..\CORE\core_cm4_simd.h
+..\obj\st7580_serial20.o: system_stm32f4xx.h
+..\obj\st7580_serial20.o: stm32f4xx_conf.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
+..\obj\st7580_serial20.o: ..\USER\stm32f4xx.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_i2c.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_iwdg.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_pwr.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rtc.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sdio.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\misc.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rng.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h
+..\obj\st7580_serial20.o: ..\FWLIB\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
+..\obj\st7580_serial20.o: AppTypes.h
+..\obj\st7580_serial20.o: D:\Program Files (x86)\Keil\ARM\RV31\INC\string.h
