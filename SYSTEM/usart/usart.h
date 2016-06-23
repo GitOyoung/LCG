@@ -28,7 +28,7 @@ extern "C" {
 	enum {
 		COM1_BAUDRATE  = 115200,
 		COM3_BAUDRATE  = 57600,
-		COM6_BAUDARTE  = 57600			
+		COM6_BAUDRATE  = 57600			
 	};
 	
 	typedef enum {

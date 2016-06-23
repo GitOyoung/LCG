@@ -189,7 +189,7 @@ void USART1_Init()
   //Usart1 NVIC 配置
   NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;//串口1中断通道
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority= 3;//抢占优先级3
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;    //子优先级3
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;    //子优先级3
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;      //IRQ通道使能
   NVIC_Init(&NVIC_InitStructure);  //根据指定的参数初始化VIC寄存器、
 
@@ -255,6 +255,46 @@ void USART2_IRQHandler()
 */
 void USART3_Init()
 {
+	//TODO
+		//TODO
+	GPIO_InitTypeDef GPIO_InitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
+	USART_InitTypeDef USART_InitStructure;
+	
+	 
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE); //
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3,ENABLE);//
+
+	GPIO_PinAFConfig(GPIOB,GPIO_PinSource10,GPIO_AF_USART3); //GPIOB10
+	GPIO_PinAFConfig(GPIOB,GPIO_PinSource11,GPIO_AF_USART3); //GPIOB11
+	 
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10 | GPIO_Pin_11; //GPIOB10、GPIOB11
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;   //50MHz
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //上拉
+	GPIO_Init(GPIOB,&GPIO_InitStructure); // PB10 PB11
+
+	 //USART3
+	USART_InitStructure.USART_BaudRate = COM3_BAUDRATE;//波特率
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//8位数据位
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;//1位停止位
+	USART_InitStructure.USART_Parity = USART_Parity_No;//无校验
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件流控
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; //收发模式
+	USART_Init(USART3, &USART_InitStructure); //初始化串口3
+
+	USART_Cmd(USART3, ENABLE);  //使能串口3
+	 
+	USART_ClearFlag(USART3, USART_FLAG_TC);
+	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);//
+	//Usart3 NVIC 配置
+	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;//
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority =3;//
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;       //
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;         //
+	NVIC_Init(&NVIC_InitStructure); //
+	
 	Coms[COM3] = USART3;
 	BF_Init(&Com3TxBuffer);
 	ComBuffers[COM3] = &Com3TxBuffer;
@@ -273,8 +313,7 @@ void USART3_IRQHandler()
     if(BF_Empty(&Com3TxBuffer)) {
 			USART_ITConfig( USART3, USART_IT_TXE, DISABLE );
 		} else {
-			cChar = BF_ReadByte(&Com3TxBuffer);
-			USART_SendData(USART3, cChar);
+			USART_SendData(USART3, BF_ReadByte(&Com3TxBuffer));
 		}
     USART_ClearITPendingBit(USART3, USART_IT_TXE);
   }
@@ -357,7 +396,7 @@ void USART6_Init()
 	GPIO_Init(GPIOC,&GPIO_InitStructure); // PC6 PC7
 
 	 //USART6 
-	USART_InitStructure.USART_BaudRate = COM6_BAUDARTE;//波特率
+	USART_InitStructure.USART_BaudRate = COM6_BAUDRATE;//波特率
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//8位数据位
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;//1位停止位
 	USART_InitStructure.USART_Parity = USART_Parity_No;//无校验
@@ -372,7 +411,7 @@ void USART6_Init()
 	//Usart6 NVIC 配置
 	NVIC_InitStructure.NVIC_IRQChannel = USART6_IRQn;//
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority =3;//
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority =2;       //
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority =3;       //
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;         //
 	NVIC_Init(&NVIC_InitStructure); //
 	//
