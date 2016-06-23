@@ -1,18 +1,15 @@
+/*
+* file: usart.h
+* author: Jeans Oyoung
+* create on June 23, 2016
+ */
 #ifndef __USART_H
 #define __USART_H
-
-
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 	
 /*---------------definitions------------------------------------*/
-	
-
-
-
-
 #define USE_USART1 1
 #define USE_USART2 1
 #define USE_USART3 1
@@ -23,8 +20,6 @@ extern "C" {
 /*-------------------enums-------------------------------------------*/
 
 /*---------------public enums-----------------------------*/
-	
-
 	enum {
 		COM1_BAUDRATE  = 115200,
 		COM2_BAUDRATE  = 115200,

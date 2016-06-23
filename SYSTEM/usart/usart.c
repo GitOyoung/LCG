@@ -1,3 +1,8 @@
+/*
+* file: usart.c
+* author: Jeans Oyoung
+* created: June 23, 2016
+ */
 #include "usart.h"
 #include "stm32f4xx_usart.h"
 #include "buffer.h"
