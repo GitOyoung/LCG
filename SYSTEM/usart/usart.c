@@ -87,13 +87,25 @@ void InitCom(Com_TypeDef com)
 	}
 }
 
+u8 SerialPutChar(Com_TypeDef com, const char value)
+{
+	Buffer *txBuffer = ComBuffers[com];
+	if(BF_Full(txBuffer)) return 0;
+	BF_Write(txBuffer, &value, 1);
+	SerialSendStart(com);
+	return 1;
+}
 
 void SerialPutBuffer(Com_TypeDef com,  const char *buffer, int size)
 {
-	Buffer *txBuffer = ComBuffers[com];
-	BF_Write(txBuffer, buffer, size);
-	SerialSendStart(com);
+	const char *pb = buffer;
+	while(size-- && SerialPutChar(com, *pb)) {
+		pb++;
+	}
 }
+
+
+
 void SerialPutString(Com_TypeDef com, const char *string)
 {
 	int length = strlen(string);
@@ -102,15 +114,9 @@ void SerialPutString(Com_TypeDef com, const char *string)
 
 void SerialSendStart(Com_TypeDef com)
 {
-//	Buffer *buffer = ComBuffers[com];
 	USART_TypeDef *Ux = Coms[com];
 	USART_ITConfig(Ux, USART_IT_TXE, ENABLE );
-//	if(BF_Empty(buffer)) {
-//		USART_ITConfig(Ux, USART_IT_TXE, DISABLE );
-//	} else {
-//		USART_ITConfig(Ux, USART_IT_TXE, ENABLE );
-//		USART_SendData(Ux, BF_ReadByte(buffer));
-//	}
+
 }
 	
 void SerialHandlerSet(Com_TypeDef com, ReceiveHandler handler)

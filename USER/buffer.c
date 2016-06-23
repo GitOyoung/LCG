@@ -19,7 +19,7 @@ BF_BOOL BF_Full(const Buffer *buffer)
 }
 int BF_ReadByte(Buffer *buffer)
 {
-	char byte = -1;
+	char byte = 0xff;
 	if(BF_Empty(buffer)) return -1;
 	byte = buffer->data[buffer->head++];
 	if(buffer->head >= BufferSize) buffer->head = 0;

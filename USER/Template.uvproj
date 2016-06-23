@@ -433,6 +433,13 @@
         </Group>
         <Group>
           <GroupName>HARDWARE</GroupName>
+          <Files>
+            <File>
+              <FileName>st7580.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\st7580.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>CORE</GroupName>
