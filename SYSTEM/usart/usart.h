@@ -14,7 +14,7 @@ extern "C" {
 
 
 #define USE_USART1 1
-//#define USE_USART2 1
+#define USE_USART2 1
 #define USE_USART3 1
 //#define USE_USART4 1
 //#define USE_USART5 1
@@ -27,6 +27,7 @@ extern "C" {
 
 	enum {
 		COM1_BAUDRATE  = 115200,
+		COM2_BAUDRATE  = 115200,
 		COM3_BAUDRATE  = 57600,
 		COM6_BAUDRATE  = 57600			
 	};
@@ -44,7 +45,7 @@ extern "C" {
 	typedef void (*ReceiveHandler)(char);
 	
 	void InitCom(Com_TypeDef com);
-	void SerialPutBuffer(Com_TypeDef com,  const char *buffer, int size, int immediate);
+	void SerialPutBuffer(Com_TypeDef com,  const char *buffer, int size);
 	void SerialPutString(Com_TypeDef com, const char *string);
 	void SerialSendStart(Com_TypeDef com);
 	

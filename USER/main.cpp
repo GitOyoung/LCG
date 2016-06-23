@@ -7,19 +7,20 @@
 #include <stdio.h>
 
 
-void U3_RecvHandler(char c)
+void U2_RecvHandler(char c)
 {
-	SerialPutBuffer(COM3, &c, 1, 1);
+	SerialPutBuffer(COM2, &c, 1);
 }
 
 int main(void)
 {
 	delay_init(168);
-	InitCom(COM3);
-	SerialHandlerSet(COM3, U3_RecvHandler);	
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+	InitCom(COM2);
+	SerialHandlerSet(COM2, U2_RecvHandler);	
 	char message[] = "Hello, World! Made by Oyoung\r\n";
 	while(1) {
-		SerialPutString(COM3, message);
+		SerialPutString(COM2, message);
 		delay_ms(1000);
 	}
 	
